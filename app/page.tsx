@@ -14,7 +14,25 @@ export default function Home() {
             AI 使用配额限制
           </h1>
           <p className="text-muted-foreground">
-            监控 Z.ai 和 Zhipu AI 的 API 使用情况
+            监控{" "}
+            <a
+              href="https://z.ai/manage-apikey/subscription"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-primary transition-colors"
+            >
+              Z.ai
+            </a>{" "}
+            和{" "}
+            <a
+              href="https://bigmodel.cn/usercenter/glm-coding/usage"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-primary transition-colors"
+            >
+              Zhipu AI
+            </a>{" "}
+            的 API 使用情况
           </p>
         </header>
 

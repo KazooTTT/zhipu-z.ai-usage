@@ -125,7 +125,27 @@ export function QuotaTable() {
                           rowSpan={providerData.limits.length}
                           className="font-medium"
                         >
-                          {providerData.provider}
+                          {providerData.provider === "Z.ai" ? (
+                            <a
+                              href="https://z.ai/manage-apikey/subscription"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="underline hover:text-primary transition-colors"
+                            >
+                              Z.ai
+                            </a>
+                          ) : providerData.provider === "Zhipu AI" ? (
+                            <a
+                              href="https://bigmodel.cn/usercenter/glm-coding/usage"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="underline hover:text-primary transition-colors"
+                            >
+                              Zhipu AI
+                            </a>
+                          ) : (
+                            providerData.provider
+                          )}
                         </TableCell>
                       )}
                       <TableCell>{limit.type}</TableCell>
