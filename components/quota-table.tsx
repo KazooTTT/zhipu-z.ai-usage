@@ -23,6 +23,8 @@ interface QuotaLimit {
   currentUsage?: number
   limit?: number
   usageDetails?: string
+  refreshPeriod?: string
+  resetTimeRemaining?: string
 }
 
 interface ProviderQuota {
@@ -40,6 +42,11 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json())
 const formatNumber = (num: number | undefined) => {
   if (num === undefined || num === null) return "N/A"
   return num.toLocaleString()
+}
+
+const extractRefreshPeriod = (type: string): string => {
+  const match = type.match(/\(([^)]+)\)/)
+  return match ? match[1] : "N/A"
 }
 
 export function QuotaTable() {
@@ -110,6 +117,7 @@ export function QuotaTable() {
               <TableRow>
                 <TableHead className="w-[140px]">服务商</TableHead>
                 <TableHead className="w-[180px]">类型</TableHead>
+                <TableHead className="w-[120px]">刷新周期</TableHead>
                 <TableHead className="w-[200px]">使用进度</TableHead>
                 <TableHead className="w-[100px]">剩余</TableHead>
                 <TableHead>当前 / 限额</TableHead>
@@ -149,6 +157,9 @@ export function QuotaTable() {
                         </TableCell>
                       )}
                       <TableCell>{limit.type}</TableCell>
+                      <TableCell className="text-sm">
+                        {limit.resetTimeRemaining ? `Resets in ${limit.resetTimeRemaining}` : "N/A"}
+                      </TableCell>
                       <TableCell>
                         <div className="flex items-center gap-2">
                           <Progress

@@ -9,6 +9,8 @@ interface QuotaLimit {
   limit?: number
   usageDetails?: string
   order: number
+  resetAt?: string
+  resetTimeRemaining?: string
 }
 
 interface ProviderConfig {
@@ -23,10 +25,32 @@ interface ProviderQuota {
   error?: string
 }
 
+const calculateTimeRemaining = (resetTimestamp?: number): string | undefined => {
+  if (!resetTimestamp) return undefined
+  
+  const now = Date.now()
+  const remainingMs = resetTimestamp - now
+  
+  if (remainingMs <= 0) return undefined
+  
+  const hours = Math.floor(remainingMs / (1000 * 60 * 60))
+  const minutes = Math.floor((remainingMs % (1000 * 60 * 60)) / (1000 * 60))
+  
+  if (hours > 0 && minutes > 0) {
+    return `${hours} hours ${minutes} minutes`
+  } else if (hours > 0) {
+    return `${hours} hour${hours > 1 ? 's' : ''}`
+  } else {
+    return `${minutes} minutes`
+  }
+}
+
 const processQuotaLimit = (data: { limits?: QuotaLimit[] }) => {
   if (!data || !data.limits) return data
 
   data.limits = data.limits.map((item) => {
+    const resetTimestamp = (item as { nextResetTime?: number }).nextResetTime
+
     if (item.type === "TOKENS_LIMIT") {
       return {
         type: "Token usage(5 Hour)",
@@ -34,6 +58,8 @@ const processQuotaLimit = (data: { limits?: QuotaLimit[] }) => {
         remaining: `${100 - item.percentage}%`,
         current: (item as { currentValue?: number }).currentValue,
         limit: (item as { usage?: number }).usage,
+        resetAt: resetTimestamp ? new Date(resetTimestamp).toISOString() : undefined,
+        resetTimeRemaining: calculateTimeRemaining(resetTimestamp),
         order: 1,
       }
     }
@@ -49,6 +75,8 @@ const processQuotaLimit = (data: { limits?: QuotaLimit[] }) => {
         currentUsage,
         limit,
         usageDetails: (item as { usageDetails?: string }).usageDetails,
+        resetAt: resetTimestamp ? new Date(resetTimestamp).toISOString() : undefined,
+        resetTimeRemaining: calculateTimeRemaining(resetTimestamp),
         order: 2,
       }
     }
