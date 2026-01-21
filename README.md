@@ -2,7 +2,8 @@
 
 [![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/kazoottts-projects/v0-ai-usage-quota)
 
-![AI Usage Quota Monitor Screenshot](./screenshot.png)
+<img width="1582" height="1034" alt="image" src="https://github.com/user-attachments/assets/5f16b9e4-bb7b-4865-9be6-e47927059fd0" />
+
 
 ## 🚀 项目简介
 
