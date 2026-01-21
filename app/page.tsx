@@ -1,10 +1,10 @@
-import { QuotaTable } from "@/components/quota-table"
+import { DashboardGrid } from "@/components/dashboard-grid"
 import { Activity } from "lucide-react"
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-background">
-      <div className="container mx-auto max-w-4xl px-4 py-8">
+      <div className="container mx-auto max-w-6xl px-4 py-8">
         <header className="mb-8 text-center">
           <div className="inline-flex items-center justify-center gap-2 rounded-full bg-primary/10 px-4 py-2 mb-4">
             <Activity className="h-5 w-5 text-primary" />
@@ -36,7 +36,7 @@ export default function Home() {
           </p>
         </header>
 
-        <QuotaTable />
+        <DashboardGrid />
 
         <footer className="mt-8 text-center text-sm text-muted-foreground">
           <p>数据每分钟自动刷新</p>

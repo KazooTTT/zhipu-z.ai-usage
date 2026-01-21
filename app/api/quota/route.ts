@@ -27,21 +27,21 @@ interface ProviderQuota {
 
 const calculateTimeRemaining = (resetTimestamp?: number): string | undefined => {
   if (!resetTimestamp) return undefined
-  
+
   const now = Date.now()
   const remainingMs = resetTimestamp - now
-  
+
   if (remainingMs <= 0) return undefined
-  
+
   const hours = Math.floor(remainingMs / (1000 * 60 * 60))
   const minutes = Math.floor((remainingMs % (1000 * 60 * 60)) / (1000 * 60))
-  
+
   if (hours > 0 && minutes > 0) {
-    return `${hours} hours ${minutes} minutes`
+    return `${hours}小时 ${minutes}分钟`
   } else if (hours > 0) {
-    return `${hours} hour${hours > 1 ? 's' : ''}`
+    return `${hours}小时`
   } else {
-    return `${minutes} minutes`
+    return `${minutes}分钟`
   }
 }
 
