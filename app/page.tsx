@@ -1,5 +1,5 @@
 import { DashboardGrid } from "@/components/dashboard-grid"
-import { Activity } from "lucide-react"
+import { Activity, Github } from "lucide-react"
 
 export default function Home() {
   return (
@@ -38,8 +38,17 @@ export default function Home() {
 
         <DashboardGrid />
 
-        <footer className="mt-8 text-center text-sm text-muted-foreground">
+        <footer className="mt-8 text-center text-sm text-muted-foreground flex flex-col items-center gap-4">
           <p>数据每分钟自动刷新</p>
+          <a
+            href="https://github.com/KazooTTT/zhipu-z.ai-usage"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 hover:text-primary transition-colors"
+          >
+            <Github className="h-4 w-4" />
+            <span>GitHub Repo</span>
+          </a>
         </footer>
       </div>
     </main>
